@@ -1,10 +1,5 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using Backend.DTO.Auth;
-using Backend.Models;
-using Backend.Services.Auth;
+﻿using Backend.Models;
 using Backend.Services.Repositories;
-using Microsoft.Extensions.Options;
 
 namespace Backend.Schema.Mutation;
 
@@ -22,16 +17,6 @@ public class Mutation
         _prductsRepository = productsRepository;
         _usersRepository = usersRepository;
     }
-    public AuthPayload SendSmsCode(
-        [Service] ISmsAuthService smsAuthService,
-        [Phone] string phone) =>
-        smsAuthService.SendSmsCode(phone);
-
-    public string GetAccessToken(
-        [Service] IOptions<AuthOptions> authOptions,
-        [Service] ISmsAuthService smsAuthService,
-        TokenInput input) =>
-        smsAuthService.GetAccessToken(input);
 
     public async Task<Order> CreateOrder(OrderInputType orderInput)
     {
